@@ -64,29 +64,17 @@
       >
         <img src="./img/p41.d160e94f.png" alt="" />
         <div class="btn-group">
-          <div
-            class="answer"
-            @click="firstTo('/img/problem1.479a8e8c.174b0489.jpeg')"
-          >
-            <img src="./img/problem1.479a8e8c.jpeg" alt="" />
+          <div class="answer" @click="firstTo('img/A1.174b0489.jpeg')">
+            <img src="./img/A1.jpeg" alt="" />
           </div>
-          <div
-            class="answer"
-            @click="firstTo('/img/problem2.dffeb2d4.71132a08.jpg')"
-          >
-            <img src="./img/problem2.dffeb2d4.jpg" alt="" />
+          <div class="answer" @click="firstTo('img/A2.71132a08.jpg')">
+            <img src="./img/A2.jpg" alt="" />
           </div>
-          <div
-            class="answer"
-            @click="firstTo('/img/problem3.5fac1313.ffb77aff.jpeg')"
-          >
-            <img src="./img/problem3.5fac1313.jpeg" alt="" />
+          <div class="answer" @click="firstTo('img/A3.ffb77aff.jpeg')">
+            <img src="./img/A3.jpeg" alt="" />
           </div>
-          <div
-            class="answer"
-            @click="firstTo('/img/problem4.1899cf01.06c3576b.jpg')"
-          >
-            <img src="./img/problem4.1899cf01.jpg" alt="" />
+          <div class="answer" @click="firstTo('img/A4.06c3576b.jpg')">
+            <img src="./img/A4.jpg" alt="" />
           </div>
         </div>
       </li>
@@ -112,29 +100,17 @@
       >
         <img src="./img/p61.7d3744fa.png" alt="" />
         <div class="btn-group">
-          <div
-            class="answer"
-            @click="firstTo('/img/perfect1.56a426d3.f59f3863.png')"
-          >
-            <img src="./img/perfect1.56a426d3.png" alt="" />
+          <div class="answer" @click="firstTo('img/B1.f59f3863.png')">
+            <img src="./img/B1.png" alt="" />
           </div>
-          <div
-            class="answer"
-            @click="firstTo('/img/perfect2.1400b141.ca7dbed9.png')"
-          >
-            <img src="./img/perfect2.1400b141.png" alt="" />
+          <div class="answer" @click="firstTo('img/B2.ca7dbed9.png')">
+            <img src="./img/B2.png" alt="" />
           </div>
-          <div
-            class="answer"
-            @click="firstTo('/img/perfect3.2ea0c735.2d9747e0.png')"
-          >
-            <img src="./img/perfect3.2ea0c735.png" alt="" />
+          <div class="answer" @click="firstTo('img/B3.2d9747e0.png')">
+            <img src="./img/B3.png" alt="" />
           </div>
-          <div
-            class="answer"
-            @click="firstTo('/img/perfect4.bb41f8e0.b13fedc6.png')"
-          >
-            <img src="./img/perfect4.bb41f8e0.png" alt="" />
+          <div class="answer" @click="firstTo('img/B4.b13fedc6.png')">
+            <img src="./img/B4.png" alt="" />
           </div>
         </div>
       </li>
@@ -255,6 +231,8 @@
           </span>
           <img :src="lastImg[1]" alt="" />
           <img :src="lastImg[3]" alt="" class="img2" />
+          <!-- <img :src="lastImg[1]" alt="" />
+          <img :src="lastImg[3]" alt="" class="img2" /> -->
           <p>调理前</p>
           <p>调理后</p>
         </div>
@@ -333,6 +311,7 @@
 // 这里出现一个问题，就是在vue文件中如何向不使用框架时的那种引法，还是这里要使用别的方式
 
 //
+
 let arr1 = []
 let arr2 = []
 let arr3 = []
@@ -345,6 +324,9 @@ for (let i = 35; i < 96; i++) {
 for (let i = 50; i < 121; i++) {
   arr3.push(i)
 }
+let width3 = 77 * 56 + 180
+let width1 = 64 * 56 + 110
+let width2 = 74 * 56 + 110
 import BScroll from 'better-scroll'
 export default {
   created() {
@@ -353,6 +335,15 @@ export default {
       this.personScroll2()
       this.personScroll3()
     })
+  },
+  mounted() {
+    const that = this
+    window.onresize = () => {
+      return (() => {
+        window.screeWidth = document.body.clientWidth
+        that.screeWidth = window.screeWidth
+      })()
+    }
   },
 
   data() {
@@ -429,8 +420,8 @@ export default {
     //那个横向滚动的
     personScroll() {
       // 默认有六个li子元素，每个子元素的宽度为120px
-      let width = 61 * 56 + 110
-      this.$refs.weightRef.style.width = width + 'px'
+
+      this.$refs.weightRef.style.width = width1 + 'px'
       // this.$nextTick 是一个异步函数，为了确保 DOM 已经渲染
       this.$nextTick(() => {
         if (!this.scroll) {
@@ -449,8 +440,8 @@ export default {
     },
     personScroll2() {
       // 默认有六个li子元素，每个子元素的宽度为120px
-      let width = 61 * 56 + 110
-      this.$refs.weightRef2.style.width = width + 'px'
+
+      this.$refs.weightRef2.style.width = width2 + 'px'
       // this.$nextTick 是一个异步函数，为了确保 DOM 已经渲染
       this.$nextTick(() => {
         if (!this.scroll2) {
@@ -461,6 +452,7 @@ export default {
             // 忽略竖直方向的滚动
             scrollY: false,
             eventPassthrough: 'vertical',
+            probeType: 3,
           })
         } else {
           this.scroll2.refresh()
@@ -469,8 +461,8 @@ export default {
     },
     personScroll3() {
       // 默认有六个li子元素，每个子元素的宽度为120px
-      let width = 70 * 56 + 180
-      this.$refs.weightRef3.style.width = width + 'px'
+
+      this.$refs.weightRef3.style.width = width3 + 'px'
       // this.$nextTick 是一个异步函数，为了确保 DOM 已经渲染
       this.$nextTick(() => {
         if (!this.scroll3) {
@@ -535,7 +527,6 @@ export default {
     },
     touchEnd2(e) {
       if (this.A && this.B && this.C) {
-        let a
         this.controlNum3 = 2
 
         let instance = this.$refs.containerRef.style.left
@@ -572,7 +563,6 @@ export default {
       }
     },
     touchEnd(e) {
-      let a
       this.controlNum3 = 2
 
       let instance = this.$refs.containerRef.style.left
@@ -587,68 +577,7 @@ export default {
         this.allContainer = 0
       }
     },
-    // 身高的
-    heightScrollStar(e) {
-      if (this.heightSum == 1) {
-        e.stopPropagation()
-        this.heightStarX = e.touches[0].clientX
-        // console.log(this.heightStarX)
-        this.heightSum--
-      }
-    },
-    // 身高的滑动过程中
-    heightScrolling(e) {
-      e.stopPropagation()
-      this.heightEndX = this.heightStarX - e.touches[0].clientX
-      if (this.heightEndX < 0) {
-        if (this.heightEndX < -2800) {
-          this.heightEndX = 1
-        }
-        this.$refs.heightRef.style.left = `${this.heightEndX}px`
-      } else {
-        if (this.heightEndX > 404) {
-          this.heightEndX = 404
-        }
-        this.$refs.heightRef.style.left = `${this.heightEndX + 100}px`
-      }
 
-      // console.log(this.heightEndX)
-    },
-    heightScrollEnd() {
-      this.heightStarX = this.heightEndX + 100
-    },
-    // 体重的移动
-    // 开始
-    weightScollStar(e) {
-      if (this.weightSum == 1) {
-        e.stopPropagation()
-        this.weightStarX = e.touches[0].clientX
-        this.weightSum--
-      }
-    },
-    // 过程
-    weightScrolling(e) {
-      e.stopPropagation()
-      this.weightEndX = this.weightStarX - e.touches[0].clientX
-      if (this.weightEndX < 0) {
-        if (this.weightEndX < -2800) {
-          this.weightEndX = 1
-        }
-        this.$refs.weightRef.style.left = `${this.weightEndX}px`
-      } else {
-        if (this.weightEndX > 404) {
-          this.weightEndX = 404
-        }
-        this.$refs.weightRef.style.left = `${this.weightEndX + 100}px`
-        // console.log(this.weightEndX)
-      }
-    },
-    // 结束
-    weightScrollEnd() {
-      this.weightStarX = this.weightEndX + 100
-      // console.log(this.weightStarX)
-    },
-    // 胸围的移动
     // 开始
     bustScollStar(e) {
       if (this.bustNum == 1) {
@@ -686,7 +615,8 @@ export default {
 
 <style lang="less" scoped>
 .tizhong {
-  height: 100%;
+  // height: 100%;
+  padding: 17px 0;
 }
 // 到数第二页的文字的滚动
 .swiper-warpper {
@@ -860,20 +790,21 @@ button:active {
 
     .info-content-side {
       padding: 0 10px 0 110px;
-      transition-duration: 0ms;
+
       transform: translate3d(-394.8px, 0px, 0px);
-      transition-timing-function: ease-out;
+
       margin: 0 auto;
-      position: relative;
-      width: 100%;
-      height: 100%;
+      // position: relative;
+      // width: 100%;
+      // height: 100%;
       z-index: 1;
       display: flex;
       transition-property: transform;
       box-sizing: content-box;
+
       .info-content-item {
-        width: 56.4px;
-        display: inline-flex;
+        padding: 0 20px;
+        // display: inline-flex;
         align-items: center;
         justify-content: center;
         color: #fff;
@@ -885,7 +816,7 @@ button:active {
       }
     }
     .aaaa {
-      padding: 0 10px 0 170px;
+      // padding: 0 10px 0 170px;
       transform: translate3d(-904.8px, 0px, 0px);
     }
   }
@@ -962,7 +893,7 @@ button:active {
     }
     .img2 {
       left: 51vw;
-      height: 106px;
+      height: 116px;
     }
     p {
       font-size: 16px;
